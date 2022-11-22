@@ -73,6 +73,7 @@ _player addAction [
         && {alive _originalTarget}
         && {
             _originalTarget getVariable ['KPLIB_fobDist', 99999] < 20
+            || {_originalTarget getVariable ['KPLIB_campDist', 99999] < 20}
             || {_originalTarget getVariable ['KPLIB_isNearMobRespawn', false]}
             || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
         }
@@ -120,7 +121,7 @@ _player addAction [
     "
 ];
 
-// Build
+// Build FOB
 _player addAction [
     ["<t color='#FFFF00'>", localize "STR_BUILD_ACTION", "</t><img size='2' image='res\ui_build.paa'/>"] joinString "",
     "scripts\client\build\open_build_menu.sqf",
@@ -132,7 +133,28 @@ _player addAction [
     "
         isNull (objectParent _originalTarget)
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (GRLIB_fob_range * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KP_liberation_FobRange * 0.8)}
+        && {
+            _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
+            || {[3] call KPLIB_fnc_hasPermission}
+        }
+        && {build_confirmed isEqualTo 0}
+    "
+];
+
+// Build Camp
+_player addAction [
+    ["<t color='#FFFF00'>", localize "STR_BUILD_ACTION", "</t><img size='2' image='res\ui_build.paa'/>"] joinString "",
+    "scripts\client\build\open_build_menu_camp.sqf",
+    nil,
+    -750,
+    false,
+    true,
+    "",
+    "
+        isNull (objectParent _originalTarget)
+        && {alive _originalTarget}
+        && {_originalTarget getVariable ['KPLIB_campDist', 99999] < (KP_liberation_CampRange * 0.8)}
         && {
             _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
             || {[3] call KPLIB_fnc_hasPermission}
@@ -155,6 +177,7 @@ _player addAction [
         && {alive _originalTarget}
         && {
             _originalTarget getVariable ['KPLIB_fobDist', 99999] < 20
+            || _originalTarget getVariable ['KPLIB_campDist', 99999] < 20
             || {_originalTarget getVariable ['KPLIB_isNearStart', false]}
         }
         && {
@@ -267,7 +290,7 @@ _player addAction [
     "",
     "
         alive _originalTarget
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (GRLIB_fob_range * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KP_liberation_FobRange * 0.8) || _originalTarget getVariable ['KPLIB_campDist', 99999] < (KP_liberation_CampRange * 0.8)}
         && {build_confirmed isEqualTo 0}
     "
 ];
@@ -287,7 +310,8 @@ _player addAction [
         && {alive _originalTarget}
         && {!(KP_liberation_production isEqualTo [])}
         && {
-            _originalTarget getVariable ['KPLIB_fobDist', 99999] < (GRLIB_fob_range * 0.8)
+            _originalTarget getVariable ['KPLIB_fobDist', 99999] < (KP_liberation_FobRange * 0.8)
+            || _originalTarget getVariable ['KPLIB_campDist', 99999] < (KP_liberation_CampRange * 0.8)
             || {!(_originalTarget getVariable ['KPLIB_nearProd', []] isEqualTo [])}
         }
         && {build_confirmed isEqualTo 0}
@@ -308,7 +332,7 @@ _player addAction [
         && {_originalTarget getVariable ['KPLIB_hasDirectAccess', false]}
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (GRLIB_fob_range * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KP_liberation_FobRange * 0.8)}
         && {!(
             GRLIB_all_fobs isEqualTo []
             || KP_liberation_production isEqualTo []
@@ -355,7 +379,7 @@ if (player == ([] call KPLIB_fnc_getCommander)) then {
 // Create FOB clearance
 _player addAction [
     ["<t color='#FFFF00'>", localize "STR_CLEARANCE_ACTION", "</t>"] joinString "",
-    {[player getVariable ["KPLIB_fobPos", [0, 0, 0]], GRLIB_fob_range * 0.9, true] call KPLIB_fnc_createClearanceConfirm;},
+    {[player getVariable ["KPLIB_fobPos", [0, 0, 0]], KP_liberation_FobRange * 0.9, true] call KPLIB_fnc_createClearanceConfirm;},
     nil,
     -850,
     false,
@@ -365,7 +389,7 @@ _player addAction [
         _originalTarget getVariable ['KPLIB_hasDirectAccess', false]
         && {isNull (objectParent _originalTarget)}
         && {alive _originalTarget}
-        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (GRLIB_fob_range * 0.8)}
+        && {_originalTarget getVariable ['KPLIB_fobDist', 99999] < (KP_liberation_FobRange * 0.8)}
         && {build_confirmed isEqualTo 0}
     "
 ];

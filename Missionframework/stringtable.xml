@@ -456,6 +456,20 @@
             <Korean>-- 전초기지 설치 --</Korean>
             <Czech>-- POSTAVIT FOB --</Czech>
         </Key>
+        <Key ID="STR_CAMP_ACTION">
+            <Original>-- DEPLOY FOB --</Original>
+            <French>-- DEPLOYER CAMP --</French>
+            <German>-- CAMP BEREITSTELLEN --</German>
+            <Spanish>-- DESPLEGAR CAMP --</Spanish>
+            <Russian>-- РАЗВЕРНУТЬ CAMP --</Russian>
+            <Italian>-- COSTRUISCI CAMP --</Italian>
+            <Chinesesimp>-- 部署前哨 --</Chinesesimp>
+            <Chinese>-- 佈署前線基地 --</Chinese>
+            <Turkish>-- CAMP KUR --</Turkish>
+            <Portuguese>-- INSTALAR CAMP --</Portuguese>
+            <Korean>-- 전초기지 설치 --</Korean>
+            <Czech>-- POSTAVIT CAMP --</Czech>
+        </Key>
         <Key ID="STR_FOB_BUILDING_IMPOSSIBLE">
             <Original>Can't deploy a new FOB here, you must be at least %1 meters away from every other FOB. Nearest FOB is %2 meters away.</Original>
             <French>Impossible de déployer une nouvelle FOB ici, vous devez être à au moins %1 mètres de toutes les autres FOB. La FOB la plus proche est à %2 mètres d'ici.</French>
@@ -525,6 +539,19 @@
             <Korean>전초기지 설치박스</Korean>
             <Czech>FOB Kontejner</Czech>
         </Key>
+        <Key ID="STR_CAMPBOX">
+            <Original>CAMP Container</Original>
+            <French>Container CAMP</French>
+            <German>CAMP Container</German>
+            <Spanish>Contenedor de CAMP</Spanish>
+            <Russian>CAMP Контейнер</Russian>
+            <Chinesesimp>前哨部署柜</Chinesesimp>
+            <Chinese>前線基地貨櫃</Chinese>
+            <Turkish>CAMP Konteynırı</Turkish>
+            <Portuguese>CAMP no Contêiner</Portuguese>
+            <Korean>전초기지 설치박스</Korean>
+            <Czech>CAMP Kontejner</Czech>
+        </Key>
         <Key ID="STR_FOBTRUCK">
             <Original>FOB Truck</Original>
             <French>Camion FOB</French>
@@ -538,6 +565,20 @@
             <Portuguese>FOB transportável</Portuguese>
             <Korean>전초기지 설치차량</Korean>
             <Czech>FOB Náklaďák</Czech>
+        </Key>
+        <Key ID="STR_CAMPTRUCK">
+            <Original>CAMP Truck</Original>
+            <French>Camion CAMP</French>
+            <German>CAMP Lastwagen</German>
+            <Spanish>Camión de CAMP</Spanish>
+            <Russian>CAMP Грузовик</Russian>
+            <Italian>Camion CAMP</Italian>
+            <Chinesesimp>前哨部署车</Chinesesimp>
+            <Chinese>前線基地車</Chinese>
+            <Turkish>CAMP Kamyonu</Turkish>
+            <Portuguese>CAMP transportável</Portuguese>
+            <Korean>전초기지 설치차량</Korean>
+            <Czech>CAMP Náklaďák</Czech>
         </Key>
         <Key ID="STR_RESPAWN_TRUCK">
             <Original>Mobile respawn</Original>
@@ -1043,6 +1084,20 @@
             <Korean>신규 전초기지 설치</Korean>
             <Czech>POSTAVENO NOVÉ FOB</Czech>
         </Key>
+        <Key ID="STR_NOTIFICATION_CAMPBUILT_TITLE">
+            <Original>NEW CAMP BUILT</Original>
+            <French>NOUVELLE CAMP</French>
+            <German>NEUE CAMP GEBAUT</German>
+            <Spanish>NUEVA CAMP CONSTRUIDA</Spanish>
+            <Russian>НОВАЯ CAMP ПОСТРОЕНА</Russian>
+            <Italian>NUOVA CAMP COSTRUITA</Italian>
+            <Chinesesimp>新的前哨部署完成</Chinesesimp>
+            <Chinese>新的前線基地佈署完畢</Chinese>
+            <Turkish>YENİ CAMP KURULDU</Turkish>
+            <Portuguese>NOVA CAMP CONSTRUÍDA</Portuguese>
+            <Korean>신규 전초기지 설치</Korean>
+            <Czech>POSTAVENO NOVÉ CAMP</Czech>
+        </Key>
         <Key ID="STR_NOTIFICATION_FOBBUILT_TEXT">
             <Original>FOB %1 is now operational.</Original>
             <French>La FOB %1 est opérationnelle.</French>
@@ -1056,6 +1111,9 @@
             <Portuguese>FOB %1 está operacional.</Portuguese>
             <Korean>전초기지 %1 를 설치 할 수 있습니다.</Korean>
             <Czech>FOB %1 je nyní dostupné</Czech>
+        </Key>
+        <Key ID="STR_NOTIFICATION_CAMPBUILT_TEXT">
+            <Original>CAMP %1 is now operational.</Original>
         </Key>
         <Key ID="STR_NOTIFICATION_FOBSAFE_TITLE">
             <Original>FOB SAFE</Original>
@@ -1071,6 +1129,20 @@
             <Korean>전초기지 안전</Korean>
             <Czech>FOB ZABEZPEČENO</Czech>
         </Key>
+        <Key ID="STR_NOTIFICATION_CAMPSAFE_TITLE">
+            <Original>CAMP SAFE</Original>
+            <French>CAMP SECURISEE</French>
+            <German>CAMP SICHER</German>
+            <Spanish>CAMP SEGURA</Spanish>
+            <Russian>CAMP В БЕЗОПАСНОСТИ</Russian>
+            <Italian>CAMP AL SICURO</Italian>
+            <Chinesesimp>前哨已安全</Chinesesimp>
+            <Chinese>前線基地已安全</Chinese>
+            <Turkish>CAMP GÜVENDE</Turkish>
+            <Portuguese>CAMP SEGURA</Portuguese>
+            <Korean>전초기지 안전</Korean>
+            <Czech>CAMP ZABEZPEČENO</Czech>
+        </Key>
         <Key ID="STR_NOTIFICATION_FOBSAFE_TEXT">
             <Original>FOB %1 is no longer under threat.</Original>
             <French>La FOB %1 n'est plus menacée.</French>
@@ -1085,6 +1157,20 @@
             <Korean>전초기지 %1 이 안정화 되었습니다.</Korean>
             <Czech>FOB %1 už není v nebezpečí</Czech>
         </Key>
+        <Key ID="STR_NOTIFICATION_CAMPSAFE_TEXT">
+            <Original>CAMP %1 is no longer under threat.</Original>
+            <French>La CAMP %1 n'est plus menacée.</French>
+            <German>CAMP %1 ist außer Gefahr.</German>
+            <Spanish>CAMP %1 ya no está bajo amenaza</Spanish>
+            <Russian>CAMP %1 больше не находится под угрозой.</Russian>
+            <Italian>La CAMP %1 non è più in pericolo.</Italian>
+            <Chinesesimp>%1前哨脱离了危险。</Chinesesimp>
+            <Chinese>前線基地 %1 已脫離危險。</Chinese>
+            <Turkish>CAMP %1 artık tehdit altında değil.</Turkish>
+            <Portuguese>CAMP %1 não está mais sob ameaça.</Portuguese>
+            <Korean>전초기지 %1 이 안정화 되었습니다.</Korean>
+            <Czech>CAMP %1 už není v nebezpečí</Czech>
+        </Key>
         <Key ID="STR_NOTIFICATION_FOBATTACKED_TITLE">
             <Original>FOB ATTACKED</Original>
             <French>FOB ATTAQUEE</French>
@@ -1097,6 +1183,19 @@
             <Portuguese>FOB ATACADA</Portuguese>
             <Korean>전초기지 방어중</Korean>
             <Czech>FOB POD ÚTOKEM</Czech>
+        </Key>
+        <Key ID="STR_NOTIFICATION_CAMPATTACKED_TITLE">
+            <Original>CAMP ATTACKED</Original>
+            <French>CAMP ATTAQUEE</French>
+            <German>CAMP ANGEGRIFFEN</German>
+            <Spanish>CAMP ATACADA</Spanish>
+            <Russian>CAMP АТАКОВАНА</Russian>
+            <Italian>CAMP SOTTO ATTACCO</Italian>
+            <Chinesesimp>前哨遭到攻击</Chinesesimp>
+            <Turkish>CAMP SALDIRI ALTINDA</Turkish>
+            <Portuguese>CAMP ATACADA</Portuguese>
+            <Korean>전초기지 방어중</Korean>
+            <Czech>CAMP POD ÚTOKEM</Czech>
         </Key>
         <Key ID="STR_NOTIFICATION_FOBATTACKED_TEXT">
             <Original>FOB %1 is under attack!</Original>
@@ -1112,6 +1211,20 @@
             <Korean>전초기지 %1 이 공격받고 있습니다.</Korean>
             <Czech>FOB %1 pod útokem!</Czech>
         </Key>
+        <Key ID="STR_NOTIFICATION_CAMPATTACKED_TEXT">
+            <Original>CAMP %1 is under attack!</Original>
+            <French>La CAMP %1 est attaquée !</French>
+            <German>CAMP %1 wird angegriffen !</German>
+            <Spanish>CAMP %1 está bajo ataque!</Spanish>
+            <Russian>CAMP %1 атакована!</Russian>
+            <Italian>la CAMP %1 è sotto attacco!</Italian>
+            <Chinesesimp>%1前哨受到了攻击！</Chinesesimp>
+            <Chinese>前線基地 %1 受到攻擊！</Chinese>
+            <Turkish>CAMP %1 Saldırı altında</Turkish>
+            <Portuguese>CAMP %1 está sob ataque!</Portuguese>
+            <Korean>전초기지 %1 이 공격받고 있습니다.</Korean>
+            <Czech>CAMP %1 pod útokem!</Czech>
+        </Key>
         <Key ID="STR_NOTIFICATION_FOBLOST_TITLE">
             <Original>FOB DESTROYED</Original>
             <French>FOB DETRUITE</French>
@@ -1126,18 +1239,32 @@
             <Korean>전초기지 파괴</Korean>
             <Czech>FOB ZNIČENO</Czech>
         </Key>
-        <Key ID="STR_NOTIFICATION_FOBLOST_TEXT">
-            <Original>FOB %1 has been destroyed!</Original>
-            <French>La FOB %1 a été détruite !</French>
-            <German>FOB %1 wurde zerstört!</German>
-            <Spanish>La FOB %1 ha sido destruida!</Spanish>
-            <Russian>FOB %1 была уничтожена!</Russian>
-            <Italian>La FOB %1 è stata distrutta!</Italian>
+        <Key ID="STR_NOTIFICATION_CAMPLOST_TITLE">
+            <Original>CAMP DESTROYED</Original>
+            <French>CAMP DETRUITE</French>
+            <German>CAMP ZERSTÖRT</German>
+            <Spanish>CAMP DESTRUIDA</Spanish>
+            <Russian>CAMP УНИЧТОЖЕНА</Russian>
+            <Italian>CAMP DISTRUTTA</Italian>
+            <Chinesesimp>前哨被摧毁</Chinesesimp>
+            <Chinese>前線基地被摧毀</Chinese>
+            <Turkish>CAMP YOK EDİLDİ</Turkish>
+            <Portuguese>CAMP DESTRUÍDA</Portuguese>
+            <Korean>전초기지 파괴</Korean>
+            <Czech>CAMP ZNIČENO</Czech>
+        </Key>
+        <Key ID="STR_NOTIFICATION_CAMPLOST_TEXT">
+            <Original>CAMP %1 has been destroyed!</Original>
+            <French>La CAMP %1 a été détruite !</French>
+            <German>CAMP %1 wurde zerstört!</German>
+            <Spanish>La CAMP %1 ha sido destruida!</Spanish>
+            <Russian>CAMP %1 была уничтожена!</Russian>
+            <Italian>La CAMP %1 è stata distrutta!</Italian>
             <Chinesesimp>%1前哨被摧毁了！</Chinesesimp>
-            <Turkish>FOB %1 yok edildi!</Turkish>
-            <Portuguese>FOB %1 foi destruída!</Portuguese>
+            <Turkish>CAMP %1 yok edildi!</Turkish>
+            <Portuguese>CAMP %1 foi destruída!</Portuguese>
             <Korean>전초기지 %1 이 파괴되었습니다!</Korean>
-            <Czech>FOB %1 bylo zničeno</Czech>
+            <Czech>CAMP %1 bylo zničeno</Czech>
         </Key>
         <Key ID="STR_NOTIFICATION_BATTLEGROUP_TITLE">
             <Original>HOSTILE FORCES INCOMING</Original>
@@ -2672,6 +2799,20 @@
             <Korean>-- 전초기지 재배치 --</Korean>
             <Czech>-- ZABALIT FOB --</Czech>
         </Key>
+        <Key ID="STR_CAMP_REPACKAGE">
+            <Original>-- REPACKAGE CAMP --</Original>
+            <French>-- REPLIER CAMP --</French>
+            <German>-- CAMP EINPACKEN --</German>
+            <Spanish>-- EMPAQUETAR CAMP --</Spanish>
+            <Russian>-- СВЕРНУТЬ CAMP --</Russian>
+            <Italian>-- SMONTA CAMP --</Italian>
+            <Chinesesimp>-- 收起前哨 --</Chinesesimp>
+            <Chinese>-- 收起前線基地 --</Chinese>
+            <Turkish>-- CAMP'Yİ TOPLA --</Turkish>
+            <Portuguese>-- MOBILIZAR CAMP --</Portuguese>
+            <Korean>-- 전초기지 재배치 --</Korean>
+            <Czech>-- ZABALIT CAMP --</Czech>
+        </Key>
         <Key ID="STR_FOB_REPACKAGE_TITLE">
             <Original>REPACKAGE FOB</Original>
             <French>REPLIER FOB</French>
@@ -3610,6 +3751,27 @@
             <Portuguese>Número máximo de FOBs permitidas</Portuguese>
             <Korean>전초기지 건설 가능 수</Korean>
             <Czech>Maximum postavených FOB</Czech>
+        </Key>
+        <Key ID="STR_PARAMS_FOB_RANGE">
+            <Original>Radius you can build and save vehicles around the FOB</Original>
+        </Key>
+        <Key ID="STR_PARAMS_ENABLE_CAMPS">
+            <Original>Enable the building of CAMPs (REDUCED FEATURES)</Original>
+        </Key>
+        <Key ID="STR_PARAMS_CAMP_RANGE">
+            <Original>Radius you can build around the CAMP</Original>
+        </Key>
+        <Key ID="STR_PARAMS_MIN_SECTOR_BUILD_DISTANCE">
+            <Original>How far away from Sectors you must be to build a FOB</Original>
+        </Key>
+        <Key ID="STR_PARAMS_MIN_SECTOR_BUILD_DISTANCE_CAMP">
+            <Original>How far away from Sectors you must be to build a CAMP</Original>
+        </Key>
+        <Key ID="STR_PARAMS_DYNAMIC">
+            <Original>Dynamic distance according to Build Range + Sector Range</Original>
+        </Key>
+        <Key ID="STR_PARAMS_MAX_CAMPS">
+            <Original>Maximum Number of allowed CAMPs at one time</Original>
         </Key>
         <Key ID="STR_HINT_FOBS_EXCEEDED">
             <Original>You are not allowed to deploy more than %1 FOBs at the same time.</Original>
@@ -6575,6 +6737,20 @@
             <Korean>설치된 전추기지 : %1</Korean>
             <Czech>Postaveny FOB: %1</Czech>
         </Key>
+        <Key ID="STR_STATS_CAMPS_BUILT">
+            <Original>CAMPs built: %1</Original>
+            <French>CAMPs construites: %1</French>
+            <German>CAMPs gebaut: %1</German>
+            <Spanish>CAMPs construídas: %1</Spanish>
+            <Russian>CAMP построено: %1</Russian>
+            <Italian>CAMP costruita: %1</Italian>
+            <Chinesesimp>建造的前哨： %1</Chinesesimp>
+            <Chinese>建造的前線基地： %1</Chinese>
+            <Turkish>Kurulan CAMP'ler: %1</Turkish>
+            <Portuguese>CAMPs construídas: %1</Portuguese>
+            <Korean>설치된 전추기지 : %1</Korean>
+            <Czech>Postaveny CAMP: %1</Czech>
+        </Key>
         <Key ID="STR_STATS_FOBS_LOST">
             <Original>FOBs lost: %1</Original>
             <French>FOBs perdues: %1</French>
@@ -6757,6 +6933,14 @@
             <Russian>FOB свернуто.\nЕсли вы очищали место для FOB, оно будет восстановлено после перезапуска сервера.</Russian>
             <Korean>FOB가 재포장됩니다. 이 상태로 서버 재시작시 이 부근의 건물이나 장비들은 사라집니다.</Korean>
             <Czech>FOB je zabalen.\Po restartování serveru bude pravděpodobně vytvořené oprávnění zrušeno.</Czech>
+        </Key>
+        <Key ID="STR_CAMP_REPACKAGE_HINT">
+            <Original>CAMP repackaged.\nPossibly created clearance will be reverted upon server restart.</Original>
+            <German>CAMP eingepackt.\nEventuelle Gebietsräumung wird zum Serverneustart rückgängig gemacht.</German>
+            <Spanish>CAMP empacado. \nProbablemente el permiso de creación será revertido después de reiniciar el servidor.</Spanish>
+            <Russian>CAMP свернуто.\nЕсли вы очищали место для CAMP, оно будет восстановлено после перезапуска сервера.</Russian>
+            <Korean>CAMP가 재포장됩니다. 이 상태로 서버 재시작시 이 부근의 건물이나 장비들은 사라집니다.</Korean>
+            <Czech>CAMP je zabalen.\Po restartování serveru bude pravděpodobně vytvořené oprávnění zrušeno.</Czech>
         </Key>
         <Key ID="STR_FOG_PARAM">
             <Original>Dynamic fog (A3 Vanilla)</Original>

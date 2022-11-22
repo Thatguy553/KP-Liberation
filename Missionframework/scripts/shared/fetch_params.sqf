@@ -47,6 +47,7 @@ if(isServer) then {
     GET_PARAM_BOOL(GRLIB_build_first_fob, "FirstFob", 0);
     GET_PARAM_BOOL(KP_liberation_fob_vehicle, "FirstFobVehicle", 0);
     GET_PARAM(GRLIB_maximum_fobs, "MaximumFobs", 26);
+    GET_PARAM(GRLIB_maximum_camps, "MaximumCamps", 26);
     GET_PARAM(GRLIB_max_squad_size, "MaxSquadSize", 10);
     GET_PARAM_BOOL(GRLIB_blufor_defenders, "BluforDefenders", 1);
     GET_PARAM_BOOL(GRLIB_autodanger, "Autodanger", 0);
@@ -59,6 +60,13 @@ if(isServer) then {
     GET_PARAM_BOOL(KPLIB_directArsenal, "DirectArsenal", 0);
     GET_PARAM_BOOL(KP_liberation_playermenu, "PlayerMenu", 1);
     GET_PARAM(KP_liberation_victoryCondition, "VictoryCondition", 0);
+    ["--- Mission Custom Options ---", "PARAM"] call KPLIB_fnc_log;
+    GET_PARAM(KP_liberation_MinSectorBuildDistance, "MinSectorBuildDistance", 0);
+    GET_PARAM(KP_liberation_FobRange, "FobRange", 125);
+    GET_PARAM(KP_liberation_EnableCamps, "EnableCamps", 1);
+    GET_PARAM(KP_liberation_CampRange, "CampRange", 25);
+    GET_PARAM(KP_liberation_MinSectorBuildDistanceCamp, "MinSectorBuildDistanceCamp", 0);
+    GET_PARAM(KP_liberation_MaxCamps, "MaxCamps", 6);
 
     // Deactivate BI Revive when ACE Medical is running
     if (isClass (configfile >> "CfgPatches" >> "ace_medical")) then {
@@ -264,6 +272,10 @@ if (!isDedicated && hasInterface) then {
 
     _param = localize "STR_PARAM_FOBS_COUNT";
     _value = str GRLIB_maximum_fobs;
+    _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
+    
+    _param = localize "STR_PARAM_CAMPS_COUNT";
+    _value = str GRLIB_maximum_camps;
     _text = _text + format ["<font color='#ff8000'>%1</font><br />%2<br /><br />", _param, _value];
 
     _param = localize "STR_PARAM_SQUAD_SIZE";

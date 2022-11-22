@@ -1,6 +1,7 @@
-private [ "_oldbuildtype", "_cfg", "_initindex", "_dialog", "_iscommandant", "_squadname", "_buildpages", "_build_list", "_classnamevar", "_entrytext", "_icon", "_affordable", "_affordable_crew", "_selected_item", "_linked", "_linked_unlocked", "_base_link", "_link_color", "_link_str", "_nearfob", "_actual_fob"];
+private [ "_oldbuildtype", "_cfg", "_initindex", "_dialog", "_iscommandant", "_squadname", "_buildpages", "_build_list", "_classnamevar", "_entrytext", "_icon", "_affordable", "_affordable_crew", "_selected_item", "_linked", "_linked_unlocked", "_base_link", "_link_color", "_link_str", "_nearfob", "_actual_camp"];
 
-if (([ getpos player , 500 , GRLIB_side_enemy ] call KPLIB_fnc_getUnitsCount ) > 4 ) exitWith { hint localize "STR_BUILD_ENEMIES_NEARBY";};
+// Uncomment to disallow building when more than 4 enemies are within 500meters of the camp 
+// if (([ getpos player , 500 , GRLIB_side_enemy ] call KPLIB_fnc_getUnitsCount ) > 4 ) exitWith { hint localize "STR_BUILD_ENEMIES_NEARBY";};
 
 if (isNil "buildtype") then {buildtype = 1};
 if (isNil "buildindex") then {buildindex = -1};
@@ -33,16 +34,16 @@ localize "STR_BUILD7",
 localize "STR_BUILD8"
 ];
 
-_nearfob = [] call KPLIB_fnc_getNearestFob;
-_actual_fob = KP_liberation_fob_resources select {((_x select 0) distance _nearfob) < KP_liberation_FobRange};
+_nearfob = [] call KPLIB_fnc_getNearestCamp;
+_actual_camp = KP_liberation_camp_resources select {((_x select 0) distance _nearfob) < KP_liberation_CampRange};
 
 while {dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
-    _build_list = KPLIB_buildList select buildtype;
+    _build_list = KPLIB_buildListCamps select buildtype;
 
     if (_oldbuildtype != buildtype || synchro_done) then {
         synchro_done = false;
         _oldbuildtype = buildtype;
-        _actual_fob = KP_liberation_fob_resources select {((_x select 0) distance _nearfob) < KP_liberation_FobRange};
+        _actual_camp = KP_liberation_camp_resources select {((_x select 0) distance _nearfob) < KP_liberation_CampRange};
 
         lbClear 110;
         {
@@ -86,9 +87,9 @@ while {dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 
             _affordable = true;
             if (
-                ((_x select 1 > 0) && ((_x select 1) > ((_actual_fob select 0) select 1))) ||
-                ((_x select 2 > 0) && ((_x select 2) > ((_actual_fob select 0) select 2))) ||
-                ((_x select 3 > 0) && ((_x select 3) > ((_actual_fob select 0) select 3)))
+                ((_x select 1 > 0) && ((_x select 1) > ((_actual_camp select 0) select 1))) ||
+                ((_x select 2 > 0) && ((_x select 2) > ((_actual_camp select 0) select 2))) ||
+                ((_x select 3 > 0) && ((_x select 3) > ((_actual_camp select 0) select 3)))
             ) then {
                 _affordable = false;
             };
@@ -125,9 +126,9 @@ while {dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
     if (dobuild == 0 && _selected_item != -1 && (_selected_item < (count _build_list))) then {
         _build_item = _build_list select _selected_item;
         if (
-            ((_build_item select 1 == 0 ) || ((_build_item select 1) <= ((_actual_fob select 0) select 1))) &&
-            ((_build_item select 2 == 0 ) || ((_build_item select 2) <= ((_actual_fob select 0) select 2))) &&
-            ((_build_item select 3 == 0 ) || ((_build_item select 3) <= ((_actual_fob select 0) select 3)))
+            ((_build_item select 1 == 0 ) || ((_build_item select 1) <= ((_actual_camp select 0) select 1))) &&
+            ((_build_item select 2 == 0 ) || ((_build_item select 2) <= ((_actual_camp select 0) select 2))) &&
+            ((_build_item select 3 == 0 ) || ((_build_item select 3) <= ((_actual_camp select 0) select 3)))
         ) then {
             if !((_build_item select 0) isEqualType []) then {
                 if ((toLower (_build_item select 0)) in KPLIB_b_air_classes && !([_build_item select 0] call KPLIB_fnc_isClassUAV)) then {

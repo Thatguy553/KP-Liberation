@@ -23,6 +23,9 @@
 FOB_typename = "Land_Cargo_HQ_V4_F";                                    // This is the main FOB HQ building.
 FOB_box_typename = "B_Slingload_01_Cargo_F";                            // This is the FOB as a container.
 FOB_truck_typename = "B_T_Truck_01_box_F";                              // This is the FOB as a vehicle.
+CAMP_typename = "Land_TentDome_F";                                      // This is the main CAMP HQ building.
+CAMP_box_typename = "I_EAF_supplyCrate_F";                              // This is the CAMP as a container.
+CAMP_truck_typename = "B_GEN_Offroad_01_covered_F";                     // This is the CAMP as a vehicle.
 Arsenal_typename = "B_supplyCrate_F";                                   // This is the virtual arsenal as portable supply crates.
 Respawn_truck_typename = "B_T_Truck_01_medical_F";                      // This is the mobile respawn (and medical) truck.
 huron_typename = "B_Heli_Transport_03_unarmed_F";                       // This is Spartan 01, a multipurpose mobile respawn as a helicopter.
@@ -302,6 +305,8 @@ support_vehicles = [
     [Respawn_truck_typename,200,0,100],
     [FOB_box_typename,300,500,0],
     [FOB_truck_typename,300,500,75],
+    [CAMP_box_typename, 150, 250, 0],
+    [CAMP_truck_typename, 150, 250, 50],
     [KP_liberation_small_storage_building,0,0,0],
     [KP_liberation_large_storage_building,0,0,0],
     [KP_liberation_recycle_building,250,0,0],
@@ -340,6 +345,46 @@ support_vehicles = [
     ["B_Slingload_01_Ammo_F",75,200,0]                                  // Huron Ammo
 ];
 
+infantry_units_camps = [
+
+];
+
+light_vehicles_camps = [
+
+];
+
+heavy_vehicles_camps = [
+
+];
+
+air_vehicles_camps = [
+
+];
+
+static_vehicles_camps = [
+
+];
+
+buildings_camps = [
+    ["CamoNet_ghex_F",0,0,0],
+    ["CamoNet_ghex_open_F",0,0,0],
+    ["CamoNet_ghex_big_F",0,0,0]
+];
+
+support_vehicles_camps = [
+    [Arsenal_typename,100,200,0],
+    [Respawn_truck_typename,200,0,100],
+    [FOB_box_typename,300,500,0],
+    [FOB_truck_typename,300,500,75],
+    [CAMP_box_typename, 150, 250, 0],
+    [CAMP_truck_typename, 150, 250, 50],
+    [KP_liberation_small_storage_building,0,0,0],
+    [KP_liberation_large_storage_building,0,0,0],
+    [KP_liberation_recycle_building,250,0,0],
+    [KP_liberation_air_vehicle_building,1000,0,0],
+    [KP_liberation_heli_slot_building,250,0,0],
+    [KP_liberation_plane_slot_building,500,0,0]
+];
 /*
     --- Squads ---
     Pre-made squads for the commander build menu.

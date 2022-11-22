@@ -11,11 +11,16 @@ veh_action_distance = 10;
     KPLIB_b_air_classes,
     KPLIB_b_static_classes,
     KPLIB_b_support_classes,
+    KPLIB_b_light_camps_classes,
+    KPLIB_b_heavy_camps_classes,
+    KPLIB_b_air_camps_classes,
+    KPLIB_b_static_camps_classes,
+    KPLIB_b_support_camps_classes,
     KPLIB_o_allVeh_classes
 ];
 
 while {true} do {
-    waitUntil {sleep 2; player getVariable ['KPLIB_fobDist', 99999] < GRLIB_fob_range};
+    waitUntil {sleep 2; player getVariable ['KPLIB_fobDist', 99999] < KP_liberation_FobRange};
 
     if ([4] call KPLIB_fnc_hasPermission) then {
         private _detected_vehicles = (getPos player) nearObjects veh_action_detect_distance select {
@@ -32,7 +37,7 @@ while {true} do {
                 || ((typeOf _x) == "rhsusf_mkvsoc")
             ) &&
             _x distance2d startbase > 1000 &&
-            (_x distance2d ([] call KPLIB_fnc_getNearestFob)) < GRLIB_fob_range &&
+            (_x distance2d ([] call KPLIB_fnc_getNearestFob)) < KP_liberation_FobRange &&
             (getObjectType _x) >= 8
         };
 

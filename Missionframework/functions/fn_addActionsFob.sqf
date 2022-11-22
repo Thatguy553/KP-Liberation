@@ -38,10 +38,40 @@ if ((typeOf _obj) isEqualTo FOB_typename) exitWith {
     true
 };
 
+if ((typeOf _obj) isEqualTo CAMP_typename) exitWith {
+    _obj addAction [
+        ["<t color='#FFFF00'>", localize "STR_CAMP_REPACKAGE", "</t> <img size='2' image='res\ui_deployfob.paa'/>"] joinString "",
+        "scripts\client\actions\do_repackage_camp.sqf",
+        nil,
+        -754,
+        false,
+        true,
+        "",
+        "isNull (objectParent _this) && {player getVariable ['KPLIB_hasDirectAccess', false]}",
+        20
+    ];
+    true
+};
+
 if ((typeOf _obj) in [FOB_box_typename, FOB_truck_typename]) exitWith {
     _obj addAction [
         ["<t color='#FFFF00'>", localize "STR_FOB_ACTION", "</t> <img size='2' image='res\ui_deployfob.paa'/>"] joinString "",
         "scripts\client\build\do_build_fob.sqf",
+        nil,
+        -752,
+        false,
+        true,
+        "",
+        "isNull (objectParent _this) && {!FOB_build_in_progress} && {player getVariable ['KPLIB_hasDirectAccess', false] || {[3] call KPLIB_fnc_hasPermission}} && {player getVariable ['KPLIB_isAwayFromStart', false]} && {!(surfaceIsWater getPos player)}",
+        10
+    ];
+    true
+};
+
+if ((typeOf _obj) in [CAMP_box_typename, CAMP_truck_typename]) exitWith {
+    _obj addAction [
+        ["<t color='#FFFF00'>", localize "STR_CAMP_ACTION", "</t> <img size='2' image='res\ui_deployfob.paa'/>"] joinString "",
+        "scripts\client\build\do_build_camp.sqf",
         nil,
         -752,
         false,

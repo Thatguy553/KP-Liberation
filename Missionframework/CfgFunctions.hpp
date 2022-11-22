@@ -31,7 +31,9 @@ class KPLIB {
         class getCommander              {};
         class getCrateHeight            {};
         class getFobName                {};
+        class getCampName               {};
         class getFobResources           {};
+        class getCampResources           {};
         class getGroupType              {};
         class getLessLoadedHC           {};
         class getLoadout                {};
@@ -42,6 +44,7 @@ class KPLIB {
         class getNearbyPlayers          {};
         class getNearestBluforObjective {};
         class getNearestFob             {};
+        class getNearestCamp            {};
         class getNearestSector          {};
         class getNearestTower           {};
         class getNearestViVTransport    {};

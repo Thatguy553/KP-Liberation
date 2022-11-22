@@ -173,6 +173,14 @@ air_vehicles                                = air_vehicles                      
 static_vehicles                             = static_vehicles                           select {[( _x select 0)] call KPLIB_fnc_checkClass};
 buildings                                   = buildings                                 select {[( _x select 0)] call KPLIB_fnc_checkClass};
 support_vehicles                            = support_vehicles                          select {[( _x select 0)] call KPLIB_fnc_checkClass};
+infantry_units_camps                        = infantry_units_camps                      select {[( _x select 0)] call KPLIB_fnc_checkClass};
+light_vehicles_camps                        = light_vehicles_camps                      select {[( _x select 0)] call KPLIB_fnc_checkClass};
+heavy_vehicles_camps                        = heavy_vehicles_camps                      select {[( _x select 0)] call KPLIB_fnc_checkClass};
+air_vehicles_camps                          = air_vehicles_camps                        select {[( _x select 0)] call KPLIB_fnc_checkClass};
+static_vehicles_camps                       = static_vehicles_camps                     select {[( _x select 0)] call KPLIB_fnc_checkClass};
+buildings_camps                             = buildings_camps                           select {[( _x select 0)] call KPLIB_fnc_checkClass};
+support_vehicles_camps                      = support_vehicles_camps                    select {[( _x select 0)] call KPLIB_fnc_checkClass};
+
 blufor_squad_inf_light                      = blufor_squad_inf_light                    select {[_x] call KPLIB_fnc_checkClass};
 blufor_squad_inf                            = blufor_squad_inf                          select {[_x] call KPLIB_fnc_checkClass};
 blufor_squad_at                             = blufor_squad_at                           select {[_x] call KPLIB_fnc_checkClass};
@@ -217,6 +225,14 @@ KPLIB_b_buildings_classes                   = buildings                         
 KPLIB_b_support_classes                     = support_vehicles                          apply {toLower (_x select 0)};
 KPLIB_transport_classes                     = KPLIB_transportConfigs                    apply {toLower (_x select 0)};
 
+KPLIB_b_infantry_camps_classes                    = infantry_units_camps                            apply {toLower (_x select 0)};
+KPLIB_b_light_camps_classes                       = light_vehicles_camps                            apply {toLower (_x select 0)};
+KPLIB_b_heavy_camps_classes                       = heavy_vehicles_camps                            apply {toLower (_x select 0)};
+KPLIB_b_air_camps_classes                         = air_vehicles_camps                              apply {toLower (_x select 0)};
+KPLIB_b_static_camps_classes                      = static_vehicles_camps                           apply {toLower (_x select 0)};
+KPLIB_b_buildings_camps_classes                   = buildings_camps                                 apply {toLower (_x select 0)};
+KPLIB_b_support_camps_classes                     = support_vehicles_camps                          apply {toLower (_x select 0)};
+
 KPLIB_b_infantry_classes append (blufor_squad_inf_light + blufor_squad_inf + blufor_squad_at + blufor_squad_aa + blufor_squad_recon + blufor_squad_para);
 KPLIB_b_infantry_classes                    = KPLIB_b_infantry_classes                  apply {toLower _x};
 KPLIB_b_infantry_classes                    = KPLIB_b_infantry_classes                  arrayIntersect KPLIB_b_infantry_classes;
@@ -233,6 +249,7 @@ KPLIB_o_squadAir    = [opfor_squad_leader, opfor_medic, opfor_machinegunner, opf
     Liberation specific collections
 */
 KPLIB_buildList         = [[], infantry_units, light_vehicles, heavy_vehicles, air_vehicles, static_vehicles, buildings, support_vehicles, KPLIB_b_allSquads];
+KPLIB_buildListCamps    = [[], infantry_units_camps, light_vehicles_camps, heavy_vehicles_camps, air_vehicles_camps, static_vehicles_camps, buildings_camps, support_vehicles_camps, KPLIB_b_allSquads];
 KPLIB_crates            = [KP_liberation_supply_crate, KP_liberation_ammo_crate, KP_liberation_fuel_crate];
 KPLIB_airSlots          = [KP_liberation_heli_slot_building, KP_liberation_plane_slot_building];
 KPLIB_storageBuildings  = [KP_liberation_small_storage_building, KP_liberation_large_storage_building];
@@ -261,7 +278,10 @@ KPLIB_allLandVeh_classes = [[], [huron_typename]] select (huron_typename isKindO
     opfor_troup_transports apply {toLower _x},
     KPLIB_b_light_classes,
     KPLIB_b_heavy_classes,
-    KPLIB_b_support_classes select {_x isKindOf "Car" || _x isKindOf "Tank"}
+    KPLIB_b_support_classes select {_x isKindOf "Car" || _x isKindOf "Tank"},
+    KPLIB_b_light_camps_classes,
+    KPLIB_b_heavy_camps_classes,
+    KPLIB_b_support_camps_classes select {_x isKindOf "Car" || _x isKindOf "Tank"}
 ];
 KPLIB_allLandVeh_classes = KPLIB_allLandVeh_classes arrayIntersect KPLIB_allLandVeh_classes;
 
@@ -275,7 +295,7 @@ KPLIB_allAirVeh_classes = [[], [huron_typename]] select (huron_typename isKindOf
 KPLIB_b_allVeh_classes = [];
 {
     KPLIB_b_allVeh_classes append _x;
-} forEach [KPLIB_b_light_classes, KPLIB_b_heavy_classes, KPLIB_b_air_classes, KPLIB_b_static_classes, KPLIB_b_support_classes];
+} forEach [KPLIB_b_light_classes, KPLIB_b_heavy_classes, KPLIB_b_air_classes, KPLIB_b_static_classes, KPLIB_b_support_classes, KPLIB_b_light_camps_classes, KPLIB_b_heavy_camps_classes, KPLIB_b_air_camps_classes, KPLIB_b_static_camps_classes, KPLIB_b_support_camps_classes];
 
 // All opfor vehicle (land and air) classnames
 KPLIB_o_allVeh_classes  = [];
@@ -304,6 +324,9 @@ KPLIB_o_inf_classes = KPLIB_o_inf_classes apply {toLower _x};
 KPLIB_typeLightClasses = +KPLIB_b_light_classes;
 KPLIB_typeHeavyClasses = +KPLIB_b_heavy_classes;
 KPLIB_typeAirClasses   = +KPLIB_b_air_classes;
+KPLIB_typeLightClasses = +KPLIB_b_light_camps_classes;
+KPLIB_typeHeavyClasses = +KPLIB_b_heavy_camps_classes;
+KPLIB_typeAirClasses   = +KPLIB_b_air_camps_classes;
 {
     switch (true) do {
         case (_x isKindOf "Tank"):  {KPLIB_typeHeavyClasses    pushBack _x};

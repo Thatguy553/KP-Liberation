@@ -15,7 +15,7 @@ _support_to_skip = [
 
 {
     _vehtomark append _x;
-} forEach [KPLIB_b_light_classes, KPLIB_b_heavy_classes, KPLIB_b_air_classes, KPLIB_b_support_classes];
+} forEach [KPLIB_b_light_classes, KPLIB_b_heavy_classes, KPLIB_b_air_classes, KPLIB_b_support_classes, KPLIB_b_light_camps_classes, KPLIB_b_heavy_camps_classes, KPLIB_b_air_camps_classes, KPLIB_b_support_camps_classes];
 
 _vehtomark = _vehtomark - _support_to_skip;
 

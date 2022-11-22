@@ -20,21 +20,38 @@ private _fobPos = [0, 0, 0];
 private _fobDist = 99999;
 private _fobName = "";
 
+private _campPos = [0, 0, 0];
+private _campDist = 99999;
+private _campName = "";
+
 while {true} do {
     // FOB distance, name and position
     if !(GRLIB_all_fobs isEqualTo []) then {
         _fobPos = [] call KPLIB_fnc_getNearestFob;
         _fobDist = player distance2d _fobPos;
-        _fobName = ["", ["FOB", [_fobPos] call KPLIB_fnc_getFobName] joinString " "] select (_fobDist < GRLIB_fob_range);
+        _fobName = ["", ["FOB", [_fobPos] call KPLIB_fnc_getFobName] joinString " "] select (_fobDist < KP_liberation_FobRange);
     } else {
         _fobPos = [0, 0, 0];
         _fobDist = 99999;
         _fobName = "";
     };
+    if !(KPLIB_all_camps isEqualTo []) then {
+        _campPos = [] call KPLIB_fnc_getNearestCamp;
+        _campDist = player distance2d _campPos;
+        _campName = ["", ["CAMP", [_campPos] call KPLIB_fnc_getCampName] joinString " "] select (_campDist < KP_liberation_CampRange);
+    } else {
+        _campPos = [0, 0, 0];
+        _campDist = 99999;
+        _campName = "";
+    };
     // TODO more self explanatory names, KPLIB_nearestFobDist, KPLIB_currentFobName, KPLIB_nearestFobPos
     player setVariable ["KPLIB_fobDist", _fobDist];
     player setVariable ["KPLIB_fobName", _fobName];
     player setVariable ["KPLIB_fobPos", _fobPos];
+    
+    player setVariable ["KPLIB_campDist", _campDist];
+    player setVariable ["KPLIB_campName", _campName];
+    player setVariable ["KPLIB_campPos", _campPos];
 
     // Direct acces due to config, commander or admin
     player setVariable ["KPLIB_hasDirectAccess", (getPlayerUID player) in KP_liberation_commander_actions || {player == ([] call KPLIB_fnc_getCommander)} || {serverCommandAvailable "#kick"}];

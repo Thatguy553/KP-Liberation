@@ -2,6 +2,7 @@ sync_vars = []; publicVariable "sync_vars";
 
 waitUntil{!isNil "save_is_loaded"};
 waitUntil{!isNil "KP_liberation_fob_resources"};
+waitUntil{!isNil "KP_liberation_camp_resources"};
 waitUntil{!isNil "KP_liberation_supplies_global"};
 waitUntil{!isNil "KP_liberation_ammo_global"};
 waitUntil{!isNil "KP_liberation_fuel_global"};
@@ -21,6 +22,7 @@ waitUntil{!isNil "air_weight"};
 waitUntil {save_is_loaded};
 
 private _KP_liberation_fob_resources_old = [];
+private _KP_liberation_camp_resources_old = [];
 private _KP_liberation_supplies_global_old = -1;
 private _KP_liberation_ammo_global_old = -1;
 private _KP_liberation_fuel_global_old = -1;
@@ -41,6 +43,7 @@ private _air_weight_old = -1;
 while {true} do {
     waitUntil {sleep 0.25;
         !(_KP_liberation_fob_resources_old isEqualTo KP_liberation_fob_resources)
+        || !(_KP_liberation_camp_resources_old isEqualTo KP_liberation_camp_resources)
         || _KP_liberation_supplies_global_old != KP_liberation_supplies_global
         || _KP_liberation_ammo_global_old != KP_liberation_ammo_global
         || _KP_liberation_fuel_global_old != KP_liberation_fuel_global
@@ -79,11 +82,13 @@ while {true} do {
         KP_liberation_guerilla_strength,
         infantry_weight,
         armor_weight,
-        air_weight
+        air_weight,
+        KP_liberation_camp_resources
     ];
     publicVariable "sync_vars";
 
     _KP_liberation_fob_resources_old = +KP_liberation_fob_resources;
+    _KP_liberation_camp_resources_old = +KP_liberation_camp_resources;
     _KP_liberation_supplies_global_old = KP_liberation_supplies_global;
     _KP_liberation_ammo_global_old = KP_liberation_ammo_global;
     _KP_liberation_fuel_global_old = KP_liberation_fuel_global;

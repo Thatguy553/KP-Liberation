@@ -39,7 +39,7 @@ KPLIB_objectInits = [
 
     // Add ViV and build action to FOB box/truck
     [
-        [FOB_box_typename, FOB_truck_typename],
+        [FOB_box_typename, FOB_truck_typename, CAMP_box_typename, CAMP_truck_typename],
         {
             [_this] spawn {
                 params ["_fobBox"];
@@ -56,7 +56,7 @@ KPLIB_objectInits = [
 
     // Add FOB building damage handler override and repack action
     [
-        [FOB_typename],
+        [FOB_typename, CAMP_typename],
         {
             _this addEventHandler ["HandleDamage", {0}];
             [_this] spawn {

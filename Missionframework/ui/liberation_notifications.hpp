@@ -42,9 +42,24 @@ class CfgNotifications {
         color[] = { 0, 0.35, 1, 1 };
         sound = "taskUpdated";
     };
+    class lib_camp_built: lib_default_notification {
+        title = $STR_NOTIFICATION_CAMPBUILT_TITLE;
+        description = $STR_NOTIFICATION_CAMPBUILT_TEXT;
+        iconPicture = "res\notif\ui_notif_camp_new.paa";
+        color[] = { 0, 0.35, 1, 1 };
+        sound = "taskUpdated";
+    };
     class lib_fob_safe: lib_default_notification {
         title = $STR_NOTIFICATION_FOBSAFE_TITLE;
         description = $STR_NOTIFICATION_FOBSAFE_TEXT;
+        iconPicture = "res\notif\ui_notif_fob_sec.paa";
+        color[] = { 0, 0.35, 1, 1 };
+        sound = "taskUpdated";
+        priority = 3;
+    };
+    class lib_CAMP_safe: lib_default_notification {
+        title = $STR_NOTIFICATION_CAMPSAFE_TITLE;
+        description = $STR_NOTIFICATION_CAMPSAFE_TEXT;
         iconPicture = "res\notif\ui_notif_fob_sec.paa";
         color[] = { 0, 0.35, 1, 1 };
         sound = "taskUpdated";
@@ -57,10 +72,24 @@ class CfgNotifications {
         color[] = { 1, 1, 0, 1 };
         sound = "taskCanceled";
     };
+    class lib_camp_attacked: lib_default_notification {
+        title = $STR_NOTIFICATION_CAMPATTACKED_TITLE;
+        description = $STR_NOTIFICATION_CAMPATTACKED_TEXT;
+        iconPicture = "res\notif\ui_notif_camp_und.paa";
+        color[] = { 1, 1, 0, 1 };
+        sound = "taskCanceled";
+    };
     class lib_fob_lost: lib_default_notification {
         title = $STR_NOTIFICATION_FOBLOST_TITLE;
         description = $STR_NOTIFICATION_FOBLOST_TEXT;
         iconPicture = "res\notif\ui_notif_fob_los.paa";
+        color[] = { 1, 0, 0, 1 };
+        sound = "taskFailed";
+    };
+    class lib_camp_lost: lib_default_notification {
+        title = $STR_NOTIFICATION_CAMPLOST_TITLE;
+        description = $STR_NOTIFICATION_CAMPLOST_TEXT;
+        iconPicture = "res\notif\ui_notif_camp_los.paa";
         color[] = { 1, 0, 0, 1 };
         sound = "taskFailed";
     };

@@ -12,6 +12,7 @@ private _frame_pos = [];
 GRLIB_force_redeploy = false;
 
 waitUntil {!isNil "GRLIB_all_fobs"};
+waitUntil {!isNil "KPLIB_all_camps"};
 waitUntil {!isNil "blufor_sectors"};
 waitUntil {!isNil "save_is_loaded"};
 waitUntil {save_is_loaded};
@@ -97,6 +98,12 @@ while {true} do {
                 _x
             ];
         } forEach GRLIB_all_fobs;
+        {
+            KPLIB_respawnPositionsList pushBack [
+                format ["%1 %2 - %3", KPLIB_reduced_fob_name, (military_alphabet select _forEachIndex), mapGridPosition _x],
+                _x
+            ];
+        } forEach KPLIB_all_camps;
 
         if (KP_liberation_mobilerespawn) then {
             if (KP_liberation_respawn_time <= time) then {

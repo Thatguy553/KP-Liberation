@@ -35,7 +35,7 @@ private _allBlueGroups = allGroups select {
 private ["_fobPos", "_fobObjects", "_grpUnits", "_fobMines"];
 {
     _fobPos = _x;
-    _fobObjects = (_fobPos nearObjects (GRLIB_fob_range * 1.2)) select {
+    _fobObjects = (_fobPos nearObjects (KP_liberation_FobRange * 1.2)) select {
         ((toLower (typeof _x)) in KPLIB_classnamesToSave) &&        // Exclude classnames which are not in the presets
         {alive _x} &&                                               // Exclude dead or broken objects
         {getObjectType _x >= 8} &&                                  // Exclude preplaced terrain objects
@@ -56,10 +56,10 @@ private ["_fobPos", "_fobObjects", "_grpUnits", "_fobMines"];
         _grpUnits = (units _x) select {!(isPlayer _x) && (alive _x) && !((typeOf _x) in KPLIB_o_inf_classes) && !((typeOf _x) in militia_squad)};
         // Add to save array
         _aiGroups pushBack [getPosATL (leader _x), (_grpUnits apply {typeOf _x})];
-    } forEach (_allBlueGroups select {(_fobPos distance2D (leader _x)) < (GRLIB_fob_range * 1.2)});
+    } forEach (_allBlueGroups select {(_fobPos distance2D (leader _x)) < (KP_liberation_FobRange * 1.2)});
 
     // Save all mines around FOB
-    _fobMines = allMines inAreaArray [_fobPos, GRLIB_fob_range * 1.2, GRLIB_fob_range * 1.2];
+    _fobMines = allMines inAreaArray [_fobPos, KP_liberation_FobRange * 1.2, KP_liberation_FobRange * 1.2];
     _allMines append (_fobMines apply {[
         getPosWorld _x,
         [vectorDirVisual _x, vectorUpVisual _x],
@@ -67,6 +67,40 @@ private ["_fobPos", "_fobObjects", "_grpUnits", "_fobMines"];
         _x mineDetectedBy GRLIB_side_friendly
     ]});
 } forEach GRLIB_all_fobs;
+{
+    _fobPos = _x;
+    _fobObjects = (_fobPos nearObjects (KP_liberation_FobRange * 1.2)) select {
+        ((toLower (typeof _x)) in KPLIB_classnamesToSave) &&        // Exclude classnames which are not in the presets
+        {alive _x} &&                                               // Exclude dead or broken objects
+        {getObjectType _x >= 8} &&                                  // Exclude preplaced terrain objects
+        {speed _x < 5} &&                                           // Exclude moving objects (like civilians driving through)
+        {isNull attachedTo _x} &&                                   // Exclude attachTo'd objects
+        {((getpos _x) select 2) < 10} &&                            // Exclude hovering helicopters and the like
+        {!(_x getVariable ["KP_liberation_edenObject", false])} &&  // Exclude all objects placed via editor in mission.sqm
+        {!(_x getVariable ["KP_liberation_preplaced", false])} &&   // Exclude preplaced (e.g. little birds from carrier)
+        {!((toLower (typeOf _x)) in KPLIB_crates)}                  // Exclude storage crates (those are handled separately)
+    };
+
+    _allObjects = _allObjects + (_fobObjects select {!((toLower (typeOf _x)) in KPLIB_storageBuildings)});
+    _allStorages = _allStorages + (_fobObjects select {(_x getVariable ["KP_liberation_storage_type",-1]) == 0});
+
+    // Process all groups near this FOB
+    {
+        // Get only living AI units of the group by excluding possible POWs currently in the player group
+        _grpUnits = (units _x) select {!(isPlayer _x) && (alive _x) && !((typeOf _x) in KPLIB_o_inf_classes) && !((typeOf _x) in militia_squad)};
+        // Add to save array
+        _aiGroups pushBack [getPosATL (leader _x), (_grpUnits apply {typeOf _x})];
+    } forEach (_allBlueGroups select {(_fobPos distance2D (leader _x)) < (KP_liberation_FobRange * 1.2)});
+
+    // Save all mines around FOB
+    _fobMines = allMines inAreaArray [_fobPos, KP_liberation_FobRange * 1.2, KP_liberation_FobRange * 1.2];
+    _allMines append (_fobMines apply {[
+        getPosWorld _x,
+        [vectorDirVisual _x, vectorUpVisual _x],
+        typeOf _x,
+        _x mineDetectedBy GRLIB_side_friendly
+    ]});
+} forEach KPLIB_all_camps;
 
 // Save all fetched objects
 private ["_savedPos", "_savedVecDir", "_savedVecUp", "_class", "_hasCrew"];
@@ -171,7 +205,8 @@ private _stats = [
     stats_spartan_respawns,
     stats_supplies_produced,
     stats_supplies_spent,
-    stats_vehicles_recycled
+    stats_vehicles_recycled,
+    stats_camps_built
 ];
 
 // Pack the weights in one array
@@ -204,5 +239,6 @@ private _weights = [
     resources_intel,
     _allMines,
     _allCrates,
-    KPLIB_sectorTowers
+    KPLIB_sectorTowers,
+    KPLIB_all_camps
 ] // return

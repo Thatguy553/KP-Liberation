@@ -3,7 +3,8 @@
 private [ "_maxdist", "_truepos", "_built_object_remote", "_pos", "_grp", "_classname", "_idx", "_unitrank", "_posfob", "_ghost_spot", "_vehicle", "_dist", "_actualdir", "_near_objects", "_near_objects_25", "_debug_colisions" ];
 
 build_confirmed = 0;
-_maxdist = GRLIB_fob_range;
+_maxdist = KP_liberation_FobRange;
+
 _truepos = [];
 _debug_colisions = false;
 KP_vector = true;
@@ -31,18 +32,24 @@ while { true } do {
     build_confirmed = 1;
     build_invalid = 0;
     _classname = "";
-    if ( buildtype == 99 ) then {
-        _classname = FOB_typename;
-    } else {
-        _classname = ((KPLIB_buildList select buildtype) select buildindex) select 0;
-        _price_s = ((KPLIB_buildList select buildtype) select buildindex) select 1;
-        _price_a = ((KPLIB_buildList select buildtype) select buildindex) select 2;
-        _price_f = ((KPLIB_buildList select buildtype) select buildindex) select 3;
+    if (_classname == CAMP_typename) then {
+        _maxdist = KP_liberation_CampRange;
+    };
+    systemChat str KP_liberation_CampRange;
+    switch (buildtype) do {
+        case 99: { _classname = FOB_typename; };
+        case 98: { _classname = CAMP_typename; buildtype = 99; };
+        default {
+            _classname = ((KPLIB_buildList select buildtype) select buildindex) select 0;
+            _price_s = ((KPLIB_buildList select buildtype) select buildindex) select 1;
+            _price_a = ((KPLIB_buildList select buildtype) select buildindex) select 2;
+            _price_f = ((KPLIB_buildList select buildtype) select buildindex) select 3;
 
-        _nearfob = [] call KPLIB_fnc_getNearestFob;
-        _storage_areas = (_nearfob nearobjects (GRLIB_fob_range * 2)) select {(_x getVariable ["KP_liberation_storage_type",-1]) == 0};
+            _nearfob = [] call KPLIB_fnc_getNearestFob;
+            _storage_areas = (_nearfob nearobjects (KP_liberation_FobRange * 2)) select {(_x getVariable ["KP_liberation_storage_type",-1]) == 0};
 
-        [_price_s, _price_a, _price_f, _classname, buildtype, _storage_areas] remoteExec ["build_remote_call",2];
+            [_price_s, _price_a, _price_f, _classname, buildtype, _storage_areas] remoteExec ["build_remote_call",2];
+        };
     };
 
     if(buildtype == 1) then {
@@ -51,7 +58,7 @@ while { true } do {
         if ( manned ) then {
             _grp = createGroup GRLIB_side_friendly;
         };
-        _classname createUnit [_pos, _grp,"this addMPEventHandler [""MPKilled"", {_this spawn kill_manager}]", 0.5, "private"];
+        _classname createUnit [_pos, _grp, "this addMPEventHandler [""MPKilled"", {_this spawn kill_manager}]", 0.5, "private"];
         build_confirmed = 0;
     } else {
         if ( buildtype == 8 ) then {
@@ -76,7 +83,10 @@ while { true } do {
         } else {
             _posfob = getpos player;
             if (buildtype != 99) then {
-                _posfob = [] call KPLIB_fnc_getNearestFob;
+                private _fobAndCamp = [[] call KPLIB_fnc_getNearestCamp, [] call KPLIB_fnc_getNearestFob];
+                private _camps = _fobAndCamp apply {[_posfob distance2d _x, _x]};
+                _camps sort true;
+                _posfob = (_camps select 0) select 1;
             };
 
             _idactcancel = -1;
@@ -89,7 +99,8 @@ while { true } do {
             if (buildtype == 6 ) then {
                 _idactplacebis = player addAction ["<t color='#B0FF00'>" + localize "STR_PLACEMENT_BIS" + "</t> <img size='2' image='res\ui_confirm.paa'/>",{build_confirmed = 2; repeatbuild = true; hint localize "STR_CONFIRM_HINT";},"",-785,false,false,"","build_invalid == 0 && build_confirmed == 1"];
             };
-            if (buildtype == 6 || buildtype == 99  || (toLower _classname) in KPLIB_storageBuildings || _classname isEqualTo KP_liberation_recycle_building || _classname isEqualTo KP_liberation_air_vehicle_building) then {
+            if (buildtype == 6 || buildtype == 99 || (toLower _classname) in KPLIB_storageBuildings || _classname isEqualTo KP_liberation_recycle_building || _classname isEqualTo KP_liberation_air_vehicle_building) then {
+                systemChat "Vector";
                 _idactsnap = player addAction ["<t color='#B0FF00'>" + localize "STR_GRID" + "</t>",{gridmode = gridmode + 1;},"",-735,false,false,"","build_confirmed == 1"];
                 _idactvector = player addAction ["<t color='#B0FF00'>" + localize "STR_VECACTION" + "</t>",{KP_vector = !KP_vector;},"",-800,false,false,"","build_confirmed == 1"];
             };
@@ -119,14 +130,14 @@ while { true } do {
 
             while { build_confirmed == 1 && alive player } do {
                 _truedir = 90 - (getdir player);
-                if ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes) then {
+                if ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes || (toLower (typeOf _vehicle)) in KPLIB_b_static_camps_classes) then {
                     _truepos = [((getposATL player) select 0) + (_dist * (cos _truedir)), ((getposATL player) select 1) + (_dist * (sin _truedir)),((getposATL player) select 2)];
                 } else {
                     _truepos = [((getpos player) select 0) + (_dist * (cos _truedir)), ((getpos player) select 1) + (_dist * (sin _truedir)),0];
                 };
                 _actualdir = ((getdir player) + build_rotation);
                 if ( _classname == "Land_Cargo_Patrol_V1_F" || _classname == "Land_PortableLight_single_F" ) then { _actualdir = _actualdir + 180 };
-                if ( _classname == FOB_typename ) then { _actualdir = _actualdir + 270 };
+                if ( _classname == FOB_typename || _classname == CAMP_typename ) then { _actualdir = _actualdir + 270 };
 
                 while { _actualdir > 360 } do { _actualdir = _actualdir - 360 };
                 while { _actualdir < 0 } do { _actualdir = _actualdir + 360 };
@@ -147,7 +158,12 @@ while { true } do {
 
                 if !(buildtype isEqualTo 99) then {
                     {
-                        _x setPos (_posfob getPos [GRLIB_fob_range, 10 * _forEachIndex])
+                        if (_classname == CAMP_typename) then {
+                            systemChat "CAMP RANGE";
+                            _x setPos (_posfob getPos [KP_liberation_CampRange, 10 * _forEachIndex]);
+                        } else {
+                            _x setPos (_posfob getPos [KP_liberation_FobRange, 10 * _forEachIndex]);
+                        };
                     } forEach _fob_spheres;
                 };
 
@@ -157,10 +173,12 @@ while { true } do {
 
                 _near_objects = (_truepos nearobjects ["AllVehicles", _dist]) ;
                 _near_objects = _near_objects + (_truepos nearobjects [FOB_box_typename, _dist]);
+                _near_objects = _near_objects + (_truepos nearobjects [CAMP_box_typename, _dist]);
                 _near_objects = _near_objects + (_truepos nearobjects [Arsenal_typename, _dist]);
 
                 _near_objects_25 = (_truepos nearobjects ["AllVehicles", 50]) ;
                 _near_objects_25 = _near_objects_25 + (_truepos nearobjects [FOB_box_typename, 50]);
+                _near_objects_25 = _near_objects_25 + (_truepos nearobjects [CAMP_box_typename, 50]);
                 _near_objects_25 = _near_objects_25 + (_truepos nearobjects [Arsenal_typename, 50]);
 
                 if(	buildtype != 6 ) then {
@@ -171,7 +189,7 @@ while { true } do {
                 private _remove_objects = [];
                 {
                     private _typeOfX = typeOf _x;
-                    if ((_x isKindOf "Animal") || (_typeOfX in GRLIB_ignore_colisions_when_building) || (_typeOfX isKindOf "CAManBase") || (isPlayer _x) || (_x == _vehicle) || ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes)) then {
+                    if ((_x isKindOf "Animal") || (_typeOfX in GRLIB_ignore_colisions_when_building) || (_typeOfX isKindOf "CAManBase") || (isPlayer _x) || (_x == _vehicle) || ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes) || (toLower (typeOf _vehicle)) in KPLIB_b_static_camps_classes) then {
                         _remove_objects pushback _x;
                     };
                 } foreach _near_objects;
@@ -179,7 +197,7 @@ while { true } do {
                 private _remove_objects_25 = [];
                 {
                     private _typeOfX = typeOf _x;
-                    if ((_x isKindOf "Animal") || (_typeOfX in GRLIB_ignore_colisions_when_building) || (_typeOfX isKindOf "CAManBase") || (isPlayer _x) || (_x == _vehicle) || ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes)) then {
+                    if ((_x isKindOf "Animal") || (_typeOfX in GRLIB_ignore_colisions_when_building) || (_typeOfX isKindOf "CAManBase") || (isPlayer _x) || (_x == _vehicle) || ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes) || (toLower (typeOf _vehicle)) in KPLIB_b_static_camps_classes) then {
                         _remove_objects_25 pushback _x;
                     };
                 } foreach _near_objects_25;
@@ -202,25 +220,29 @@ while { true } do {
                 } else {
                     GRLIB_conflicting_objects = [];
                 };
-
+                
                 if (count _near_objects == 0 && ((_truepos distance _posfob) < _maxdist) && (  ((!surfaceIsWater _truepos) && (!surfaceIsWater getpos player)) || (_classname in boats_names) ) ) then {
 
                     if ( ((buildtype == 6) || (buildtype == 99)) && ((gridmode % 2) == 1) ) then {
+                        systemChat "setpos";
                         _vehicle setpos [round (_truepos select 0),round (_truepos select 1), _truepos select 2];
                     } else {
-                        if ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes) then {
+                        systemChat "setposelse";
+                        if ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes || (toLower (typeOf _vehicle)) in KPLIB_b_static_camps_classes) then {
                             _vehicle setPosATL _truepos;
                         } else {
                             _vehicle setpos _truepos;
                         };
                     };
                     if (buildtype == 6 || buildtype == 99 || (toLower _classname) in KPLIB_storageBuildings || _classname isEqualTo KP_liberation_recycle_building || _classname isEqualTo KP_liberation_air_vehicle_building) then {
+                        systemChat "setVectors";
                         if (KP_vector) then {
                             _vehicle setVectorUp [0,0,1];
                         } else {
                             _vehicle setVectorUp surfaceNormal position _vehicle;
                         };
                     } else {
+                        systemChat "setVectorsElse";
                         _vehicle setVectorUp surfaceNormal position _vehicle;
                     };
                     if(build_invalid == 1) then {
@@ -267,8 +289,14 @@ while { true } do {
                 _price_a = ((KPLIB_buildList select buildtype) select buildindex) select 2;
                 _price_f = ((KPLIB_buildList select buildtype) select buildindex) select 3;
 
-                _nearfob = [] call KPLIB_fnc_getNearestFob;
-                _storage_areas = (_nearfob nearobjects (GRLIB_fob_range * 2)) select {(_x getVariable ["KP_liberation_storage_type",-1]) == 0};
+
+                if (_classname == CAMP_typename) then {
+                    _nearfob = [] call KPLIB_fnc_getNearestCamp;
+                    _storage_areas = (_nearfob nearobjects (KP_liberation_CampRange * 2)) select {(_x getVariable ["KP_liberation_storage_type",-1]) == 0};
+                } else {                    
+                    _nearfob = [] call KPLIB_fnc_getNearestFob;
+                    _storage_areas = (_nearfob nearobjects (KP_liberation_FobRange * 2)) select {(_x getVariable ["KP_liberation_storage_type",-1]) == 0};
+                };
 
                 _supplyCrates = ceil (_price_s / 100);
                 _ammoCrates = ceil (_price_a / 100);
@@ -303,7 +331,7 @@ while { true } do {
                 _vehicle = _classname createVehicle _truepos;
                 _vehicle allowDamage false;
                 _vehicle setdir _vehdir;
-                if ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes) then {
+                if ((toLower (typeOf _vehicle)) in KPLIB_b_static_classes || (toLower (typeOf _vehicle)) in KPLIB_b_static_camps_classes) then {
                     _vehicle setPosATL _truepos;
                 } else {
                     _vehicle setpos _truepos;
@@ -356,7 +384,11 @@ while { true } do {
 
             if(buildtype == 99) then {
                 _new_fob = getpos player;
-                [_new_fob, false] remoteExec ["build_fob_remote_call",2];
+                if (_classname == CAMP_typename) then {
+                    [_new_fob, false] remoteExec ["build_camp_remote_call",2];
+                } else {
+                    [_new_fob, false] remoteExec ["build_fob_remote_call",2];
+                };
                 buildtype = 1;
             };
             build_confirmed = 0;

@@ -33,7 +33,7 @@ if (hasInterface) then {
 };
 
 // All classnames of objects which should be saved
-KPLIB_classnamesToSave = [toLower FOB_typename, toLower huron_typename];
+KPLIB_classnamesToSave = [toLower FOB_typename, toLower huron_typename, toLower CAMP_typename];
 
 /*
     --- Locals ---
@@ -44,7 +44,7 @@ private _aiGroups = [];
 // Current campaign date and time
 private _dateTime = [];
 // Vehicles which shouldn't be handled in the kill manager
-private _noKillHandler = [toLower FOB_typename, toLower huron_typename];
+private _noKillHandler = [toLower FOB_typename, toLower huron_typename, toLower CAMP_typename];
 // All objects which should be loaded/saved
 private _objectsToSave = [];
 // All storages which are handled for resource persistence
@@ -73,6 +73,8 @@ blufor_sectors = [];
 combat_readiness = 0;
 // All FOBs
 GRLIB_all_fobs = [];
+// All CAMPs
+KPLIB_all_camps = [];
 // Player permissions data
 GRLIB_permissions = [];
 // Vehicle unlock links
@@ -131,6 +133,7 @@ stats_civilians_healed = 0;
 stats_civilians_killed = 0;
 stats_civilians_killed_by_players = 0;
 stats_fobs_built = 0;
+stats_camps_built = 0;
 stats_fobs_lost = 0;
 stats_fuel_produced = 0;
 stats_fuel_spent = 0;
@@ -196,6 +199,7 @@ if (!isNil "_saveData") then {
         _allMines                                   = _saveData param [19, []];
         _allCrates                                  = _saveData param [20, []];
         KPLIB_sectorTowers                          = _saveData param [21, []];
+        KPLIB_all_camps                             = _saveData param [22, []];
 
         stats_ammo_produced                         = _stats select  0;
         stats_ammo_spent                            = _stats select  1;
@@ -236,6 +240,7 @@ if (!isNil "_saveData") then {
         stats_supplies_produced                     = _stats select 36;
         stats_supplies_spent                        = _stats select 37;
         stats_vehicles_recycled                     = _stats select 38;
+        stats_camps_built                           = _stats select 39;
     } else {
         // --- Compatibility for older save data ---
         ["Save data from version: pre 0.96.5", "SAVE"] call KPLIB_fnc_log;
@@ -509,6 +514,7 @@ publicVariable "stats_civilian_vehicles_seized";
 publicVariable "stats_ieds_detonated";
 publicVariable "blufor_sectors";
 publicVariable "GRLIB_all_fobs";
+publicVariable "KPLIB_all_camps";
 publicVariable "KPLIB_sectorsUnderAttack";
 publicVariable "KP_liberation_clearances";
 

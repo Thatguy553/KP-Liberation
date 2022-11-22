@@ -48,6 +48,7 @@ if ([] call KP_liberation_victoryCheck && GRLIB_endgame != 1) then {
     publicstats pushback stats_supplies_spent;
     publicstats pushback stats_vehicles_recycled;
     publicstats pushback _rabbits;
+    publicstats pushback stats_camps_built;
 
     publicstats remoteExec ["remote_call_endgame"];
 
@@ -88,6 +89,7 @@ if ([] call KP_liberation_victoryCheck && GRLIB_endgame != 1) then {
     [format ["Sectors liberated: %1", stats_sectors_liberated], "MISSION END"] call KPLIB_fnc_log;
     [format ["Sectors lost: %1", stats_sectors_lost], "MISSION END"] call KPLIB_fnc_log;
     [format ["FOBs built: %1", stats_fobs_built], "MISSION END"] call KPLIB_fnc_log;
+    [format ["CAMPs built: %1", stats_camps_built], "MISSION END"] call KPLIB_fnc_log;
     [format ["FOBs lost: %1", stats_fobs_lost], "MISSION END"] call KPLIB_fnc_log;
     [format ["Secondary objectives accomplished: %1", stats_secondary_objectives], "MISSION END"] call KPLIB_fnc_log;
     [format ["Prisoners captured: %1", stats_prisoners_captured], "MISSION END"] call KPLIB_fnc_log;

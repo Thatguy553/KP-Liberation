@@ -65,6 +65,42 @@ class Params {
         texts[] = {3, 5, 7, 10, 15, 20, 26};
         default = 10;
     };
+    class FobRange {
+        title = $STR_PARAMS_FOB_RANGE;
+        values[] = {125, 225, 325};
+        texts[] = {125, 225, 325};
+        default = 125;
+    };
+    class MinSectorBuildDistance {
+        title = $STR_PARAMS_MIN_SECTOR_BUILD_DISTANCE;
+        values[] = {1, 0, 100, 200, 300, 400, 500, 1000};
+        texts[] = {$STR_PARAMS_DYNAMIC, 0, 100, 200, 300, 400, 500, 1000};
+        default = 0;
+    }
+    class EnableCamps {
+        title = $STR_PARAMS_ENABLE_CAMPS;
+        values[] = {1, 0};
+        texts[] = {$STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED};
+        default = 1;
+    }
+    class CampRange {
+        title = $STR_PARAMS_CAMP_RANGE;
+        values[] = {25, 50, 75};
+        texts[] = {25, 50, 75};
+        default = 25;
+    }
+    class MaxCamps {
+        title = $STR_PARAMS_MAX_CAMPS;
+        values[] = {2, 4, 6, 8, 10, 15};
+        texts[] = {2, 4, 6, 8, 10, 15};
+        default = 6;
+    }
+    class MinSectorBuildDistanceCamp {
+        title = $STR_PARAMS_MIN_SECTOR_BUILD_DISTANCE_CAMP;
+        values[] = {1, 0, 50, 75, 100, 125, 150, 200};
+        texts[] = {$STR_PARAMS_DYNAMIC, 0, 50, 75, 100, 125, 150, 200};
+        default = 0;
+    }
     class MaxSquadSize {
         title = $STR_PARAM_SQUAD_SIZE;
         values[] = {0, 1, 2, 4, 6, 8, 10, 12, 16, 20, 24, 30, 36};

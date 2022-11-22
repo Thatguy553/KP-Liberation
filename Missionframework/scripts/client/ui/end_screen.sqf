@@ -38,7 +38,8 @@ params [
     "_stats_supplies_produced",
     "_stats_supplies_spent",
     "_stats_vehicles_recycled",
-    "_stats_rabbits_killed"
+    "_stats_rabbits_killed",
+    "_stats_camps_built"
 ];
 
 // Some preparations
@@ -134,6 +135,7 @@ if (dialog) then {sleep 3};
 [694, format [localize "STR_STATS_FOBS_LOST", _stats_fobs_lost]] call _addReportLine;
 [695, format [localize "STR_STATS_SIDEMISSIONS", _stats_secondary_objectives]] call _addReportLine;
 [696, format [localize "STR_STATS_PRISONERS", _stats_prisoners_captured], true] call _addReportLine;
+[697, format [localize "STR_STATS_CAMPS_BUILT", _stats_camps_built]] call _addReportLine;
 [] call _cleanPage;
 
 // Seventh page

@@ -232,7 +232,7 @@ class FSM
                                          "&& {" \n
                                          "    private _locations = [startbase];" \n
                                          "    _locations append GRLIB_all_fobs;" \n
-                                         "    !((_locations select {(_x distance2d player) < GRLIB_fob_range}) isEqualTo [])" \n
+                                         "    !((_locations select {(_x distance2d player) < KP_liberation_FobRange}) isEqualTo [])" \n
                                          "}"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
@@ -641,7 +641,7 @@ class FSM
                                         to="Complete_task";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"!(" \n
-                                         "    (((GRLIB_all_fobs select 0) nearObjects GRLIB_fob_range) select {" \n
+                                         "    (((GRLIB_all_fobs select 0) nearObjects KP_liberation_FobRange) select {" \n
                                          "        (_x getVariable [""KP_liberation_storage_type"", -1]) == 0" \n
                                          "    }) isEqualTo []" \n
                                          ")"/*%FSM</CONDITION""">*/;
@@ -917,7 +917,7 @@ class FSM
                                         to="Start_production";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
                                         condition=/*%FSM<CONDITION""">*/"!(" \n
-                                         "    (((markerPos _factory) nearObjects GRLIB_fob_range) select {" \n
+                                         "    (((markerPos _factory) nearObjects KP_liberation_FobRange) select {" \n
                                          "        (_x getVariable [""KP_liberation_storage_type"", -1]) == 1" \n
                                          "    }) isEqualTo []" \n
                                          ")"/*%FSM</CONDITION""">*/;

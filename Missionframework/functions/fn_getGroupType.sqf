@@ -44,6 +44,11 @@ if (_vehType isEqualTo "") exitWith {_grpType};
     if ((toLower _vehType) in KPLIB_b_air_classes) exitWith {_grpType = "air";};
     if ((toLower _vehType) in KPLIB_b_static_classes) exitWith {_grpType = "static";};
     if ((toLower _vehType) in KPLIB_b_support_classes) exitWith {_grpType = "support";};
+    if ((toLower _vehType) in KPLIB_b_light_camps_classes) exitWith {_grpType = "light";};
+    if ((toLower _vehType) in KPLIB_b_heavy_camps_classes) exitWith {_grpType = "heavy";};
+    if ((toLower _vehType) in KPLIB_b_air_camps_classes) exitWith {_grpType = "air";};
+    if ((toLower _vehType) in KPLIB_b_static_camps_classes) exitWith {_grpType = "static";};
+    if ((toLower _vehType) in KPLIB_b_support_camps_classes) exitWith {_grpType = "support";};
     if ([_vehType] call KPLIB_fnc_isClassUAV) exitWith {_grpType = "uav";};
 };
 

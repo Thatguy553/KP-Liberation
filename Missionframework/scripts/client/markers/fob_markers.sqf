@@ -1,10 +1,12 @@
 waitUntil {!isNil "save_is_loaded"};
 waitUntil {!isNil "GRLIB_all_fobs"};
+waitUntil {!isNil "KPLIB_all_camps"};
 waitUntil {save_is_loaded};
 
 uiSleep 3;
 
 private _markers = [];
+private _camp_markers = [];
 private _markers_mobilespawns = [];
 
 while {true} do {
@@ -14,12 +16,27 @@ while {true} do {
 
         for "_idx" from 0 to ((count GRLIB_all_fobs) - 1) do {
             private _marker = createMarkerLocal [format ["fobmarker%1", _idx], markers_reset];
-            _marker setMarkerTypeLocal "b_hq";
+            _marker setMarkerTypeLocal KPLIB_fob_marker;
             _marker setMarkerSizeLocal [1.5, 1.5];
             _marker setMarkerPosLocal (GRLIB_all_fobs select _idx);
             _marker setMarkerTextLocal format ["FOB %1",military_alphabet select _idx];
-            _marker setMarkerColorLocal "ColorYellow";
+            _marker setMarkerColorLocal KPLIB_fob_marker_color;
             _markers pushback _marker;
+        };
+    };
+    
+    if (count _camp_markers != count KPLIB_all_camps) then {
+        {deleteMarkerLocal _x;} forEach _camp_markers;
+        _camp_markers = [];
+
+        for "_idx" from 0 to ((count KPLIB_all_camps) - 1) do {
+            private _marker = createMarkerLocal [format ["campmarker%1", _idx], markers_reset];
+            _marker setMarkerTypeLocal KPLIB_reduced_fob_marker;
+            _marker setMarkerSizeLocal [1, 1];
+            _marker setMarkerPosLocal (KPLIB_all_camps select _idx);
+            _marker setMarkerTextLocal format ["%1 %2", KPLIB_reduced_fob_name, military_alphabet select _idx];
+            _marker setMarkerColorLocal KPLIB_reduced_fob_marker_color;
+            _camp_markers pushback _marker;
         };
     };
 
@@ -32,8 +49,8 @@ while {true} do {
 
             for "_idx" from 0 to ((count _respawn_trucks) - 1) do {
                 _marker = createMarkerLocal [format ["mobilespawn%1", _idx], markers_reset];
-                _marker setMarkerTypeLocal "mil_end";
-                _marker setMarkerColorLocal "ColorYellow";
+                _marker setMarkerTypeLocal KPLIB_mobile_respawn_marker;
+                _marker setMarkerColorLocal KPLIB_mobile_respawn_marker_color;
                 _markers_mobilespawns pushback _marker;
             };
         };

@@ -202,7 +202,16 @@ GRLIB_color_friendly = "ColorBLUFOR";                                   // Frien
 GRLIB_color_enemy = "ColorOPFOR";                                       // Enemy sector marker color.
 GRLIB_color_enemy_bright = "ColorRED";                                  // Enemy sector marker color (activated).
 
-GRLIB_fob_range = 125;                                                  // Build range around the main FOB building.
+// Now in parameters
+// GRLIB_fob_range = 125;                                                  // Build range around the main FOB building.
+KPLIB_reduced_fob_name = "CAMP";
+KPLIB_fob_marker = "b_hq";
+KPLIB_fob_marker_color = "ColorYellow";
+KPLIB_reduced_fob_marker = "b_recon";
+KPLIB_reduced_fob_marker_color = "ColorWest";
+KPLIB_mobile_respawn_marker = "mil_end";
+KPLIB_mobile_respawn_marker_color = "ColorWest";
+
 GRLIB_halo_altitude = 2500;                                             // Altitude in metres for the HALO jump.
 GRLIB_secondary_missions_costs = [15, 10, 8];                           // Intel price for the secondary missions [FOB hunting, Convoy ambush, SAR].
 GRLIB_secondary_objective_impact = 0.6;                                 // The percentage impact against enemy combat readiness for a successful FOB hunt.
