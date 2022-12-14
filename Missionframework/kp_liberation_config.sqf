@@ -1128,6 +1128,7 @@ KP_liberation_small_storage_positions = [
 ];
 
 // DO NOT CHANGE (unless you know what you are doing).
+campBuilding = false;
 GRLIB_endgame = 0;
 KP_liberation_production_interval = ceil (KP_liberation_production_interval / GRLIB_resources_multiplier);
 GRLIB_battlegroup_size = GRLIB_battlegroup_size * (sqrt GRLIB_unitcap) * (sqrt GRLIB_csat_aggressivity);

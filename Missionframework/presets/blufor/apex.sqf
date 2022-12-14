@@ -346,23 +346,36 @@ support_vehicles = [
 ];
 
 infantry_units_camps = [
-
+    ["B_T_Recon_LAT_F",30,0,0],                                         // Recon Scout (AT)
+    ["B_T_Recon_M_F",30,0,0],                                           // Recon Marksman
+    ["B_T_Recon_Medic_F",30,0,0]                                        // Recon Paramedic
 ];
 
 light_vehicles_camps = [
-
+    ["I_MRAP_03_hmg_F",100,40,50],                                      // Strider (HMG)
+    ["I_MRAP_03_gmg_F",100,60,50],                                      // Strider (GMG)
+    ["rhsusf_m1025_w",100,0,50],                                        // M1025A2
+    ["rhsusf_m1025_w_m2",100,40,50]                                     // M1025A2 (M2)
 ];
 
 heavy_vehicles_camps = [
-
+    ["I_LT_01_AA_F",300,250,175],                                       // AWC 302 Nyx (AA)
+    ["I_LT_01_AT_F",300,250,175],                                       // AWC 302 Nyx (AT)
+    ["I_LT_01_cannon_F",300,250,175],                                   // AWC 302 Nyx (Cannon)
+    ["RHS_M6_wd",300,250,175]                                          // M6A2
 ];
 
 air_vehicles_camps = [
-
+    ["RHS_UH60M2",250,0,150],                                           // UH-60M (Unarmed)
+    ["RHS_UH60M",250,80,150],                                           // UH-60M
+    ["RHS_UH60M_MEV2",300,0,150],                                       // UH-60M MEV2
+    ["RHS_CH_47F",275,80,175]                                          // CH-47 Chinook (Armed)
 ];
 
 static_vehicles_camps = [
-
+    ["B_GMG_01_F",35,60,0],                                             // Mk32A GMG 20mm
+    ["B_GMG_01_high_F",35,60,0],                                        // Mk32 GMG 20mm (Raised)
+    ["B_GMG_01_A_F",45,60,0]                                           // Mk32 GMG 20mm (Autonomous)
 ];
 
 buildings_camps = [

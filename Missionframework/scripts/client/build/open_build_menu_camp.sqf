@@ -7,6 +7,9 @@ if (isNil "buildtype") then {buildtype = 1};
 if (isNil "buildindex") then {buildindex = -1};
 dobuild = 0;
 _oldbuildtype = -1;
+campBuilding = true;
+systemChat "campBuilding True";
+systemChat str campBuilding;
 _cfg = configFile >> "cfgVehicles";
 _initindex = buildindex;
 
@@ -206,4 +209,4 @@ while {dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
     sleep 0.1;
 };
 
-if (!alive player || dobuild != 0) then { closeDialog 0 };
+if (!alive player || dobuild != 0) then { closeDialog 0; };
