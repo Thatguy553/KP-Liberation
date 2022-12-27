@@ -457,7 +457,7 @@
             <Czech>-- POSTAVIT FOB --</Czech>
         </Key>
         <Key ID="STR_CAMP_ACTION">
-            <Original>-- DEPLOY FOB --</Original>
+            <Original>-- DEPLOY CAMP --</Original>
             <French>-- DEPLOYER CAMP --</French>
             <German>-- CAMP BEREITSTELLEN --</German>
             <Spanish>-- DESPLEGAR CAMP --</Spanish>

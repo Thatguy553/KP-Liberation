@@ -80,44 +80,37 @@ while {true} do {
         KP_liberation_air_vehicle_building_near = _hasAir;
         KP_liberation_recycle_building_near = _hasRecycling;
     } else {
-        _showResources = false;
-        KP_liberation_supplies = 0;
-        KP_liberation_ammo = 0;
-        KP_liberation_fuel = 0;
-        KP_liberation_air_vehicle_building_near = false;
-        KP_liberation_recycle_building_near = false;
+        if (_currentCamp != "") then {
+            _showResources = true;
+
+            private _nearestCamp = player getVariable "KPLIB_campPos";
+            ([_nearestCamp] call KPLIB_fnc_getCampResources) params ["", "_supplies", "_ammo", "_fuel", "_hasAir", "_hasRecycling"];
+
+            if (KP_liberation_resources_global || {_visibleMap}) then {
+                // Overwrite FOB name in global mode
+                _currentCamp = localize "STR_RESOURCE_GLOBAL";
+
+                KP_liberation_supplies = KP_liberation_supplies_global;
+                KP_liberation_ammo = KP_liberation_ammo_global;
+                KP_liberation_fuel = KP_liberation_fuel_global;
+            } else {
+                KP_liberation_supplies = _supplies;
+                KP_liberation_ammo = _ammo;
+                KP_liberation_fuel = _fuel;
+            };
+            // TODO this is used by build scripts, move to relevant places
+            KP_liberation_air_vehicle_building_near = _hasAir;
+            KP_liberation_recycle_building_near = _hasRecycling;
+        } else {
+            _showResources = false;
+            KP_liberation_supplies = 0;
+            KP_liberation_ammo = 0;
+            KP_liberation_fuel = 0;
+            KP_liberation_air_vehicle_building_near = false;
+            KP_liberation_recycle_building_near = false;
+        };
     };
     
-    // Player is at CAMP
-    if (_currentCamp != "" || {_visibleMap}) then {
-        _showResources = true;
-
-        private _nearestCamp = player getVariable "KPLIB_campPos";
-        ([_nearestCamp] call KPLIB_fnc_getFobResources) params ["", "_supplies", "_ammo", "_fuel", "_hasAir", "_hasRecycling"];
-
-        if (KP_liberation_resources_global || {_visibleMap}) then {
-            // Overwrite FOB name in global mode
-            _currentCamp = localize "STR_RESOURCE_GLOBAL";
-
-            KP_liberation_supplies = KP_liberation_supplies_global;
-            KP_liberation_ammo = KP_liberation_ammo_global;
-            KP_liberation_fuel = KP_liberation_fuel_global;
-        } else {
-            KP_liberation_supplies = _supplies;
-            KP_liberation_ammo = _ammo;
-            KP_liberation_fuel = _fuel;
-        };
-        // TODO this is used by build scripts, move to relevant places
-        KP_liberation_air_vehicle_building_near = _hasAir;
-        KP_liberation_recycle_building_near = _hasRecycling;
-    } else {
-        _showResources = false;
-        KP_liberation_supplies = 0;
-        KP_liberation_ammo = 0;
-        KP_liberation_fuel = 0;
-        KP_liberation_air_vehicle_building_near = false;
-        KP_liberation_recycle_building_near = false;
-    };
 
     if (_overlayVisible) then {
 
